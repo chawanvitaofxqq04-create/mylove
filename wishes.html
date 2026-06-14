@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Fahsai</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            background-color: #fbf5f7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+            font-family: 'Outfit', 'Sarabun', sans-serif;
+            opacity: 0;
+            animation: fadeIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+            position: relative;
+        }
+
+        /* Floating Photos Background */
+        .floating-photos {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .float-photo {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border: 10px solid white;
+            border-bottom: 30px solid white;
+            box-shadow: 2px 8px 25px rgba(0,0,0,0.1);
+            opacity: 0.85;
+            animation: floatSlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatSlow {
+            0% { margin-top: 0px; }
+            100% { margin-top: 25px; }
+        }
+
+        /* Adjust size for smaller screens so it doesn't block text */
+        @media (max-width: 1200px) {
+            .float-photo { width: 140px; height: 140px; border-bottom: 25px solid white; }
+        }
+        @media (max-width: 768px) {
+            .float-photo { width: 90px; height: 90px; border-bottom: 18px solid white; opacity: 0.3; }
+        }
+
+        .hearts-header {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            gap: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hearts-header span {
+            display: inline-block;
+            animation: floatHeart 2s ease-in-out infinite alternate;
+        }
+        
+        .hearts-header span:nth-child(2) { animation-delay: 0.5s; }
+        .hearts-header span:nth-child(3) { animation-delay: 1s; }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-15px) scale(1.1); }
+        }
+
+        .letter-card {
+            background: #ffffff;
+            border: 5px solid #ff6db3; /* Thick pink border */
+            border-radius: 16px;
+            padding: 40px 50px;
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+            /* A subtle purple shadow to match the reference */
+            box-shadow: 0 15px 35px rgba(115, 80, 255, 0.15); 
+            color: #4a4a4a;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            position: relative;
+            z-index: 10;
+            text-align: left; /* Keep left alignment for readability, but justify can be used if preferred */
+        }
+        
+        .letter-card p {
+            margin-bottom: 18px;
+        }
+        
+        .letter-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .bottom-btn {
+            margin-top: 40px;
+            background: #ff6db3;
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+            padding: 12px 40px;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 109, 179, 0.3);
+            transition: all 0.3s;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .bottom-btn:hover {
+            background: #ff4d9e;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(255, 109, 179, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .letter-card {
+                padding: 25px 20px;
+                font-size: 0.95rem;
+                border-width: 3px;
+            }
+            .hearts-header {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Background Photos -->
+    <div class="floating-photos">
+        <!-- Left side -->
+        <img src="assets/new_mirror1.jpg" class="float-photo" style="top: 8%; left: 6%; transform: rotate(-12deg); animation-delay: 0s;">
+        <img src="assets/new_mirror2.jpg" class="float-photo" style="top: 40%; left: 12%; transform: rotate(8deg); animation-delay: 1s;">
+        <img src="assets/S__25755656_0.jpg" class="float-photo" style="top: 72%; left: 5%; transform: rotate(-6deg); animation-delay: 2s;">
+        
+        <!-- Right side -->
+        <img src="assets/S__25755657_0.jpg" class="float-photo" style="top: 12%; right: 7%; transform: rotate(14deg); animation-delay: 0.5s;">
+        <img src="assets/S__25755658_0.jpg" class="float-photo" style="top: 45%; right: 10%; transform: rotate(-9deg); animation-delay: 1.5s;">
+        <img src="assets/S__25755659_0.jpg" class="float-photo" style="top: 70%; right: 6%; transform: rotate(10deg); animation-delay: 2.5s;">
+    </div>
+
+    <div class="hearts-header">
+        <span>🩷</span><span>🩷</span><span>🩷</span>
+    </div>
+
+    <div class="letter-card">
+        <p>สุขสันต์วันเกิดอายุครบ 20 ปีนะฟ้าใส โตเป็นผู้ใหญ่ขึ้นอีกปีแล้วนะ 🎂✨</p>
+        <p>ถึงจะโตขึ้นแต่ก็ยังเป็นฟ้าใสคนที่กินเก่งเหมือนเดิม โดยเฉพาะโอวัลตินปั่นที่กินไม่เคยเบื่อ ต่อให้ฝนตกหนักแค่ไหนเค้าก็พร้อมขับรถตากฝนเปียกเป็นหมาตกน้ำไปซื้อให้กินเสมอแหละ ส่วนเรื่องที่ชอบอาบน้ำแต่งหน้านานเป็นชั่วโมง หรือชอบบ่นชอบนอยเก่ง เอาจริงๆ เค้าก็ชินแล้วล่ะ ต่อให้ฟ้าจะขี้บ่นยังไงเค้าก็ชอบในความเป็นฟ้าใสอยู่ดี</p>
+        <p>พอนึกย้อนไปตั้งแต่ตอนที่เราเจอกันแรกๆ ที่แทบไม่กล้ามองหน้ากันเลย จนขยับมาเป็นแฟนกัน ได้จับมือ ลูบหัว ได้กอด ได้จุ๊บกัน มันเป็นความรู้สึกที่ดีมากๆ เลยนะ ยิ่งตอนที่ได้นอนกอดกันครั้งแรกมันฟินและมีความสุขสุดๆ ดีใจจริงๆ ที่มีฟ้าใสอยู่ข้างๆ ส่วนเรื่องที่เค้าชอบเพลียหลับจนลืมตื่นมาปลุกบ่อยๆ อันนี้เค้าขอโทษจริงๆ นะ เค้าตั้งใจและอยากทำหน้าที่นี้ให้ฟ้าใสทุกวันเลย</p>
+        <p>ช่วงเวลาที่ผ่านมาเรามีเรื่องราวด้วยกันเยอะเลยเนอะ ขอบคุณที่คอยดูแลและน่ารักกับเค้านะ ทั้งตอนที่ช่วยย้อมผมให้ หรือตอนที่เราแว้นไปเดินตลาดในมอด้วยกัน ถึงแม้ว่าบางทีเราจะตีกันบ่อย ทะเลาะกันจนเกือบจะเลิกกันบ้าง แต่สุดท้ายเราก็พยายามทำความเข้าใจกันและไม่ยอมปล่อยมือกันไปไหน</p>
+        <p>วันเกิดปีนี้เค้าก็ขอให้ฟ้ามีความสุขมากๆ นะครับ เค้าจะคอยอยู่เป็นคนซื้อโอวัลตินปั่นให้ คอยดูแล คอยรับฟังเวลาที่ฟ้าบ่น แล้วก็จะอยู่ข้างๆ แบบนี้ไม่ทิ้งไปไหนแน่นอน รักฟ้าใสนะครับ 🤍🎉</p>
+    </div>
+
+    <button class="bottom-btn" id="confetti-btn">puppy & ducky</button>
+
+    <!-- Confetti Logic -->
+    <script>
+        document.getElementById('confetti-btn').addEventListener('click', function() {
+            var duration = 3000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 6,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ff6bb1', '#ffde59', '#7d5fff', '#ffffff']
+                });
+                confetti({
+                    particleCount: 6,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ff6bb1', '#ffde59', '#7d5fff', '#ffffff']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        });
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>

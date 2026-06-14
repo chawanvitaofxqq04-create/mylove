@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puppy & Ducky</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts for the cute cursive title (Mali supports Thai) -->
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fbf5f7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            opacity: 0;
+            animation: fadeIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+        }
+
+        /* Title Area */
+        .title-container {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .main-title {
+            font-family: 'Mali', cursive;
+            font-size: 4.5rem;
+            color: #ffde59; /* Yellow */
+            -webkit-text-stroke: 2px #7d5fff; /* Purple outline */
+            text-shadow: 4px 4px 0 #7d5fff;
+            margin: 0;
+            line-height: 1;
+            z-index: 2;
+            position: relative;
+            letter-spacing: 2px;
+        }
+
+        .sub-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            color: #ff5e94;
+            font-size: 1.1rem;
+            background: transparent;
+            padding: 5px 40px;
+            border: 1px solid #c5b4e3;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: -10px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 1px;
+        }
+        
+        .sub-title::before, .sub-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 1px;
+            background: #c5b4e3;
+        }
+        .sub-title::before { left: 0; }
+        .sub-title::after { right: 0; }
+
+        /* 2x3 Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .grid-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 2px solid #f2e3e8;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            padding: 4px; /* White border inside */
+        }
+
+        .grid-item:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .grid-item.illustration img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+        }
+
+        /* Bottom Button */
+        .date-btn {
+            margin-top: 40px;
+            background: #ff6bb1;
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 12px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(255, 107, 177, 0.4);
+            transition: all 0.3s;
+        }
+
+        .date-btn:hover {
+            background: #ff4d9e;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 177, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .grid-container {
+                gap: 10px;
+            }
+            .main-title { font-size: 3.5rem; }
+            .grid-item { border-radius: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title-container">
+        <h1 class="main-title">สุขสันต์วันเกิด</h1>
+        <div class="sub-title">ฟ้าใสหมูอ้วน 💖</div>
+    </div>
+
+    <div class="grid-container">
+        <!-- Top Row: Photos -->
+        <div class="grid-item"><img src="assets/S__25755653_0.jpg" alt="Photo 1"></div>
+        <div class="grid-item"><img src="assets/S__25755654_0.jpg" alt="Photo 2"></div>
+        <div class="grid-item"><img src="assets/S__25755655_0.jpg" alt="Photo 3"></div>
+
+        <!-- Bottom Row: Illustrations -->
+        <div class="grid-item illustration"><img src="assets/pig_cake_1.png" alt="Pig with cake"></div>
+        <div class="grid-item illustration"><img src="assets/pig_cake_2.png" alt="Pig with hat and cake"></div>
+        <div class="grid-item illustration"><img src="assets/pig_cake_3.png" alt="Happy pig with cake"></div>
+    </div>
+
+    <!-- Navigate to next page (video page) -->
+    <a href="video.html" class="date-btn">ไปหน้าต่อไปกัน</a>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Memory</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        body {
+            background-color: #f7f3f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            opacity: 0;
+            animation: fadeIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .top-pill {
+            color: #ff6db3;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 8px 25px;
+            border: 2px solid #b7a6d8;
+            border-radius: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+            letter-spacing: 0.5px;
+            background: transparent;
+        }
+
+        .mySwiper {
+            width: 100%;
+            max-width: 1000px;
+            padding: 30px 0;
+            margin-bottom: 20px;
+        }
+
+        .swiper-slide {
+            width: 260px;
+            max-width: 65vw;
+            aspect-ratio: 9 / 16;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            opacity: 0.4;
+            transform: scale(0.85);
+            box-sizing: border-box;
+            border: 3px solid transparent;
+        }
+
+        .swiper-slide-active {
+            opacity: 1;
+            transform: scale(1.05);
+            border: 4px solid #ff6db3;
+            box-shadow: 0 15px 35px rgba(255, 109, 179, 0.4);
+            z-index: 10;
+        }
+
+        .swiper-slide video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .love-text {
+            color: #5c62d6; /* Blueish purple */
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .hearts-container {
+            display: flex;
+            gap: 15px;
+            font-size: 3rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .hearts-container:hover {
+            transform: scale(1.1);
+        }
+
+        .hearts-container span {
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        .hearts-container span:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .date-btn {
+            margin-top: 35px;
+            background: #ff6bb1;
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 12px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(255, 107, 177, 0.4);
+            transition: all 0.3s;
+        }
+
+        .date-btn:hover {
+            background: #ff4d9e;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 177, 0.6);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="top-pill">wish we could stay together for a long time</div>
+
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><video src="assets/803152301.464798.mp4" autoplay muted playsinline></video></div>
+            <div class="swiper-slide"><video src="assets/803152301.541140.mp4" autoplay muted playsinline></video></div>
+            <div class="swiper-slide"><video src="assets/803156794.916788.mp4" autoplay muted playsinline></video></div>
+            <div class="swiper-slide"><video src="assets/803156814.729967.mp4" autoplay muted playsinline></video></div>
+            <div class="swiper-slide"><video src="assets/803156874.878917.mp4" autoplay muted playsinline></video></div>
+            <div class="swiper-slide"><video src="assets/803156893.065329.mp4" autoplay muted playsinline></video></div>
+        </div>
+    </div>
+
+    <div class="love-text">I love You</div>
+
+    <div class="hearts-container">
+        <span>💙</span><span>🩷</span><span>💙</span>
+    </div>
+
+    <!-- Navigate to next page -->
+    <a href="wishes.html" class="date-btn">ไปหน้าต่อไปกัน</a>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: "auto",
+            centeredSlides: true,
+            spaceBetween: 20,
+            loop: true,
+            speed: 800
+        });
+
+        function playActiveVideo() {
+            // Pause all videos and reset time
+            document.querySelectorAll('.mySwiper video').forEach(v => {
+                v.pause();
+                v.currentTime = 0;
+            });
+            
+            // Find active slide and play its video
+            let activeSlide = document.querySelector('.swiper-slide-active');
+            if (activeSlide) {
+                let activeVideo = activeSlide.querySelector('video');
+                if (activeVideo) {
+                    activeVideo.play();
+                    
+                    // When this video ends, move to the next slide
+                    activeVideo.onended = function() {
+                        swiper.slideNext();
+                    };
+                }
+            }
+        }
+
+        // Trigger logic on slide change
+        swiper.on('slideChangeTransitionEnd', playActiveVideo);
+        
+        // Initial setup
+        setTimeout(playActiveVideo, 100);
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>

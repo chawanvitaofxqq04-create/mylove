@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <!-- Lock Screen -->
+    <div id="lock-screen">
+        <div class="lock-card">
+            <!-- Left: Photos -->
+            <div class="lock-left">
+                <div class="polaroid">
+                    <img src="assets/S__25755651_0.jpg" alt="Memory 1">
+                </div>
+                <div class="polaroid">
+                    <img src="assets/S__25755652_0.jpg" alt="Memory 2">
+                </div>
+            </div>
+            
+            <!-- Right: Keypad -->
+            <div class="lock-right">
+                <h2 class="lock-title">Enter our passcode</h2>
+                
+                <div class="passcode-display">
+                    <div class="digit"></div><div class="digit"></div><div class="digit"></div>
+                    <div class="digit"></div><div class="digit"></div><div class="digit"></div>
+                </div>
+
+                <div class="keypad">
+                    <button class="key-btn">1</button>
+                    <button class="key-btn">2</button>
+                    <button class="key-btn">3</button>
+                    <button class="key-btn">4</button>
+                    <button class="key-btn">5</button>
+                    <button class="key-btn">6</button>
+                    <button class="key-btn">7</button>
+                    <button class="key-btn">8</button>
+                    <button class="key-btn">9</button>
+                    <button class="key-btn action-key" id="key-clear">C</button>
+                    <button class="key-btn">0</button>
+                    <button class="key-btn action-key" id="key-del">⌫</button>
+                </div>
+                <p id="error-msg" style="color: #d81b60; opacity: 0; margin-top: 15px; font-weight: 500; transition: opacity 0.3s;">รหัสผ่านไม่ถูกต้อง</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Envelope removed as per user request. This page is now purely a lock screen. -->
+    <script src="js/script.js"></script>
+</body>
+</html>

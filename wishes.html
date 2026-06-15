@@ -56,7 +56,24 @@
             .float-photo { width: 140px; height: 140px; border-bottom: 25px solid white; }
         }
         @media (max-width: 768px) {
-            .float-photo { width: 90px; height: 90px; border-bottom: 18px solid white; opacity: 0.3; }
+            .float-photo { 
+                width: 80px; 
+                height: 80px; 
+                border-width: 5px;
+                border-bottom: 15px solid white; 
+                opacity: 0.5; 
+            }
+            /* Hide the middle ones to reduce clutter */
+            .floating-photos img:nth-child(2),
+            .floating-photos img:nth-child(5) {
+                display: none;
+            }
+            /* Move top ones further up and out */
+            .floating-photos img:nth-child(1) { top: 2% !important; left: 2% !important; }
+            .floating-photos img:nth-child(4) { top: 4% !important; right: 2% !important; }
+            /* Move bottom ones further down to avoid button */
+            .floating-photos img:nth-child(3) { top: 85% !important; left: 2% !important; }
+            .floating-photos img:nth-child(6) { top: 82% !important; right: 2% !important; }
         }
 
         .hearts-header {

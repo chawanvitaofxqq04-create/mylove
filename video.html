@@ -189,41 +189,21 @@
             centeredSlides: true,
             slidesPerView: "auto",
             loop: true,
-            speed: 800,
+            speed: 600,
             coverflowEffect: {
                 rotate: 0,
                 stretch: -10, // Adjusts gap between slides
                 depth: 200, // Pushes inactive slides back (makes them smaller)
                 modifier: 1,
                 slideShadows: false,
-            },
-            on: {
-                init: function () {
-                    const activeSlide = this.slides[this.activeIndex];
-                    const video = activeSlide.querySelector('video');
-                    if (video) video.play();
-                },
-                slideChangeTransitionStart: function () {
-                    // Pause all videos
-                    const allVideos = document.querySelectorAll('.swiper-slide video');
-                    allVideos.forEach(v => v.pause());
-                    
-                    // Play active video
-                    const activeSlide = this.slides[this.activeIndex];
-                    const video = activeSlide.querySelector('video');
-                    if (video) {
-                        video.currentTime = 0; // Optional: restart video
-                        video.play();
-                    }
-                }
             }
         });
 
         function playActiveVideo() {
-            // Pause all videos and reset time
-            document.querySelectorAll('.mySwiper video').forEach(v => {
+            // Pause all videos
+            document.querySelectorAll('.swiper-slide video').forEach(v => {
                 v.pause();
-                v.currentTime = 0;
+                // We don't reset currentTime to 0 here to allow seamless resuming if they scroll back
             });
             
             // Find active slide and play its video
@@ -231,17 +211,20 @@
             if (activeSlide) {
                 let activeVideo = activeSlide.querySelector('video');
                 if (activeVideo) {
-                    activeVideo.play();
+                    activeVideo.currentTime = 0; // start from beginning when active
+                    let playPromise = activeVideo.play();
                     
-                    // When this video ends, move to the next slide
-                    activeVideo.onended = function() {
-                        swiper.slideNext();
-                    };
+                    // Catch the promise error if user scrolls too fast
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.log("Autoplay prevented:", error);
+                        });
+                    }
                 }
             }
         }
 
-        // Trigger logic on slide change
+        // Trigger logic on slide change end for stability
         swiper.on('slideChangeTransitionEnd', playActiveVideo);
         
         // Initial setup

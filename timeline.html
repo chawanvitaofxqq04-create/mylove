@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Timeline</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body.timeline-page {
+            background-color: #f0f8ff; /* Alice Blue */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .timeline-header h1 {
+            color: #0288d1;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-header p {
+            color: #4fc3f7;
+            font-size: 1.1rem;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Vertical Line */
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #b3e5fc;
+            top: 0;
+            bottom: 0;
+            left: 30px;
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 100%;
+            padding-left: 70px;
+            padding-right: 15px;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Timeline Dot */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid #29b6f6;
+            border-radius: 50%;
+            top: 15px;
+            left: 22px;
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(41, 182, 246, 0.5);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 20px 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(41, 182, 246, 0.15);
+            border-left: 5px solid #29b6f6;
+            position: relative;
+        }
+
+        .timeline-content h2 {
+            color: #0288d1;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .timeline-date {
+            color: #4fc3f7;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .timeline-content p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .next-btn-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="timeline-page">
+
+    <div class="timeline-header">
+        <h1>Our Journey</h1>
+        <p>เส้นทางความรักของเรา 💙</p>
+    </div>
+
+    <div class="timeline-container">
+        <!-- Item 1 -->
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <h2>วันแรกที่เรารู้จักกัน</h2>
+                <div class="timeline-date">14 กุมภาพันธ์ 202x</div>
+                <p>(ข้อความตัวอย่าง) ยังจำได้ไหมว่าวันนั้นเราคุยกันเรื่องอะไรบ้าง มันเป็นจุดเริ่มต้นที่น่ารักที่สุดเลยนะ</p>
+            </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <h2>เดตแรกของเรา</h2>
+                <div class="timeline-date">xx เดือน ปี</div>
+                <p>(ข้อความตัวอย่าง) วันนั้นตื่นเต้นมากเลยที่ได้เจอกัน รอยยิ้มของเธอวันนั้นยังติดตาอยู่เลย</p>
+            </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <h2>ทริปแรกด้วยกัน</h2>
+                <div class="timeline-date">xx เดือน ปี</div>
+                <p>(ข้อความตัวอย่าง) ทริปนี้สนุกมาก ได้เรียนรู้อะไรเกี่ยวกับเธอเยอะเลย ขอบคุณที่ไปเที่ยวด้วยกันนะ</p>
+            </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <h2>วันครบรอบ</h2>
+                <div class="timeline-date">วันนี้</div>
+                <p>(ข้อความตัวอย่าง) ขอบคุณที่อยู่เคียงข้างกันมาตลอดนะ รักมากขึ้นทุกวันเลย 💙</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="next-btn-container">
+        <a href="gallery.html" class="date-btn" style="display: inline-block; margin-top: 30px;">ไปดูรูปของเรากันต่อ</a>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Scroll Animation for Timeline
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.timeline-item').forEach((item, index) => {
+            // Add slight delay based on index for cascade effect on load
+            item.style.transitionDelay = `${index * 0.15}s`;
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>

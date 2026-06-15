@@ -614,10 +614,22 @@ a {
 }
 
 @media (max-width: 768px) {
-  .lock-card { flex-direction: column; width: 95%; }
-  .lock-left { display: none; } /* Hide photos on mobile to focus on keypad */
-  .key-btn { width: 65px; height: 50px; }
-  .lock-right { padding: 30px 20px; }
+  .lock-card { flex-direction: column; width: 92%; max-width: 400px; }
+  .lock-left { 
+    display: flex; 
+    flex-direction: row; 
+    padding: 25px 15px 10px 15px; 
+    gap: 10px; 
+  }
+  .polaroid { padding: 6px 6px 20px 6px; }
+  .polaroid img { width: 110px; height: 110px; }
+  .polaroid:nth-child(2) { margin-top: 10px; transform: rotate(8deg); }
+  
+  .key-btn { width: 65px; height: 50px; font-size: 1.3rem; }
+  .lock-right { padding: 15px 20px 30px 20px; }
+  .lock-title { font-size: 1.5rem; margin-bottom: 20px; }
+  .passcode-display { gap: 10px; margin-bottom: 25px; }
+  .passcode-display .digit { width: 25px; height: 35px; font-size: 2rem; }
 }
 
 .shake {

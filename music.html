@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Song</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="music-page">
+
+    <div class="music-player-container">
+        <h2 class="music-header">Our Favorite Song</h2>
+        
+        <div class="vinyl-wrapper">
+            <div class="vinyl-record" id="vinyl">
+                <img src="assets/new_mirror1.jpg" alt="Album Cover">
+                <div class="vinyl-hole"></div>
+            </div>
+        </div>
+
+        <div class="song-info">
+            <h3 class="song-title">PUN - รักให้เธอได้รู้ (Proof.)</h3>
+            <p class="song-artist">To my dearest Fahsai 🩷</p>
+        </div>
+
+        <div class="progress-container" id="progress-container">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div class="time-container">
+            <span id="current-time">0:00</span>
+            <span id="duration">0:00</span>
+        </div>
+
+        <div class="music-controls">
+            <button class="control-btn" id="prev-btn"><i class="fas fa-backward"></i></button>
+            <button class="control-btn play-btn" id="play-btn"><i class="fas fa-play"></i></button>
+            <button class="control-btn" id="next-btn"><i class="fas fa-forward"></i></button>
+        </div>
+
+        <!-- Hidden Audio Element -->
+        <audio id="audio" src="assets/PUN - รกใหเธอไดร (Proof.).mp3"></audio>
+    </div>
+
+    <a href="puppy.html" class="next-page-btn">เปิดดูความทรงจำต่อไป ✨</a>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Music Player Logic
+        const audio = document.getElementById('audio');
+        const playBtn = document.getElementById('play-btn');
+        const vinyl = document.getElementById('vinyl');
+        const progress = document.getElementById('progress');
+        const progressContainer = document.getElementById('progress-container');
+        const currentTimeEl = document.getElementById('current-time');
+        const durationEl = document.getElementById('duration');
+
+        // Play / Pause
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                vinyl.style.animationPlayState = 'running';
+            } else {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                vinyl.style.animationPlayState = 'paused';
+            }
+        });
+
+        // Update Progress
+        audio.addEventListener('timeupdate', (e) => {
+            const { duration, currentTime } = e.srcElement;
+            const progressPercent = (currentTime / duration) * 100;
+            progress.style.width = `${progressPercent}%`;
+
+            // Calculate display time
+            let currentMins = Math.floor(currentTime / 60);
+            let currentSecs = Math.floor(currentTime % 60);
+            if (currentSecs < 10) currentSecs = `0${currentSecs}`;
+            currentTimeEl.innerText = `${currentMins}:${currentSecs}`;
+        });
+
+        // Set duration when metadata loads
+        audio.addEventListener('loadedmetadata', () => {
+            let durationMins = Math.floor(audio.duration / 60);
+            let durationSecs = Math.floor(audio.duration % 60);
+            if (durationSecs < 10) durationSecs = `0${durationSecs}`;
+            durationEl.innerText = `${durationMins}:${durationSecs}`;
+        });
+
+        // Click on progress bar to seek
+        progressContainer.addEventListener('click', (e) => {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            audio.currentTime = (clickX / width) * duration;
+        });
+
+        // Ensure vinyl stops if song ends naturally
+        audio.addEventListener('ended', () => {
+            playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            vinyl.style.animationPlayState = 'paused';
+        });
+    </script>
+</body>
+</html>

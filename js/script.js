@@ -24,10 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function checkPasscode() {
             if (currentPasscode === '160649') {
-                // Redirect to the next page instead of just unlocking the overlay
+                // Redirect to the new Music Player page first
                 document.body.classList.add('fade-out');
                 setTimeout(() => {
-                    window.location.href = 'puppy.html';
+                    window.location.href = 'music.html';
                 }, 600);
             } else {
                 errorMsg.style.opacity = 1;

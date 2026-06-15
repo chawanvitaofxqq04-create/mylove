@@ -162,12 +162,12 @@
 
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><video src="assets/803152301.464798.mp4" autoplay muted playsinline></video></div>
-            <div class="swiper-slide"><video src="assets/803152301.541140.mp4" autoplay muted playsinline></video></div>
-            <div class="swiper-slide"><video src="assets/803156794.916788.mp4" autoplay muted playsinline></video></div>
-            <div class="swiper-slide"><video src="assets/803156814.729967.mp4" autoplay muted playsinline></video></div>
-            <div class="swiper-slide"><video src="assets/803156874.878917.mp4" autoplay muted playsinline></video></div>
-            <div class="swiper-slide"><video src="assets/803156893.065329.mp4" autoplay muted playsinline></video></div>
+            <div class="swiper-slide"><video src="assets/803152301.464798.mp4" muted playsinline loop></video></div>
+            <div class="swiper-slide"><video src="assets/803152301.541140.mp4" muted playsinline loop></video></div>
+            <div class="swiper-slide"><video src="assets/803156794.916788.mp4" muted playsinline loop></video></div>
+            <div class="swiper-slide"><video src="assets/803156814.729967.mp4" muted playsinline loop></video></div>
+            <div class="swiper-slide"><video src="assets/803156874.878917.mp4" muted playsinline loop></video></div>
+            <div class="swiper-slide"><video src="assets/803156893.065329.mp4" muted playsinline loop></video></div>
         </div>
     </div>
 
@@ -196,6 +196,26 @@
                 depth: 200, // Pushes inactive slides back (makes them smaller)
                 modifier: 1,
                 slideShadows: false,
+            },
+            on: {
+                init: function () {
+                    const activeSlide = this.slides[this.activeIndex];
+                    const video = activeSlide.querySelector('video');
+                    if (video) video.play();
+                },
+                slideChangeTransitionStart: function () {
+                    // Pause all videos
+                    const allVideos = document.querySelectorAll('.swiper-slide video');
+                    allVideos.forEach(v => v.pause());
+                    
+                    // Play active video
+                    const activeSlide = this.slides[this.activeIndex];
+                    const video = activeSlide.querySelector('video');
+                    if (video) {
+                        video.currentTime = 0; // Optional: restart video
+                        video.play();
+                    }
+                }
             }
         });
 

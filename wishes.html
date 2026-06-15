@@ -194,19 +194,22 @@
 
             (function frame() {
                 confetti({
-                    particleCount: 6,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: ['#ff6bb1', '#ffde59', '#7d5fff', '#ffffff']
+                    particleCount: 150,
+                    spread: 100,
+                    origin: { y: 0.6 },
+                    colors: ['#4fc3f7', '#b3e5fc', '#0288d1', '#ffffff']
                 });
-                confetti({
-                    particleCount: 6,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: ['#ff6bb1', '#ffde59', '#7d5fff', '#ffffff']
-                });
+
+                // Fireworks effect
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 100,
+                        angle: 60,
+                        spread: 80,
+                        origin: { x: 0 },
+                        colors: ['#4fc3f7', '#b3e5fc', '#0288d1', '#ffffff']
+                    });
+                }, 250);
 
                 if (Date.now() < end) {
                     requestAnimationFrame(frame);

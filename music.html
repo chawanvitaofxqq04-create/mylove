@@ -13,11 +13,8 @@
     <div class="music-player-container">
         <h2 class="music-header">Our Favorite Song</h2>
         
-        <div class="vinyl-wrapper">
-            <div class="vinyl-record" id="vinyl">
-                <img src="assets/new_mirror1.jpg" alt="Album Cover">
-                <div class="vinyl-hole"></div>
-            </div>
+        <div class="album-art-wrapper">
+            <img src="assets/new_mirror1.jpg" alt="Album Cover" class="album-art" id="album-art">
         </div>
 
         <div class="song-info">
@@ -50,7 +47,7 @@
         // Music Player Logic
         const audio = document.getElementById('audio');
         const playBtn = document.getElementById('play-btn');
-        const vinyl = document.getElementById('vinyl');
+        const albumArt = document.getElementById('album-art');
         const progress = document.getElementById('progress');
         const progressContainer = document.getElementById('progress-container');
         const currentTimeEl = document.getElementById('current-time');
@@ -61,11 +58,11 @@
             if (audio.paused) {
                 audio.play();
                 playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                vinyl.style.animationPlayState = 'running';
+                albumArt.classList.add('playing');
             } else {
                 audio.pause();
                 playBtn.innerHTML = '<i class="fas fa-play"></i>';
-                vinyl.style.animationPlayState = 'paused';
+                albumArt.classList.remove('playing');
             }
         });
 
@@ -98,10 +95,10 @@
             audio.currentTime = (clickX / width) * duration;
         });
 
-        // Ensure vinyl stops if song ends naturally
+        // Ensure visual stops if song ends naturally
         audio.addEventListener('ended', () => {
             playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            vinyl.style.animationPlayState = 'paused';
+            albumArt.classList.remove('playing');
         });
     </script>
 </body>

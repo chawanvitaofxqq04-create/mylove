@@ -203,11 +203,10 @@
             // Pause all videos
             document.querySelectorAll('.swiper-slide video').forEach(v => {
                 v.pause();
-                // We don't reset currentTime to 0 here to allow seamless resuming if they scroll back
             });
             
-            // Find active slide and play its video
-            let activeSlide = document.querySelector('.swiper-slide-active');
+            // Find active slide precisely using Swiper's activeIndex
+            let activeSlide = swiper.slides[swiper.activeIndex];
             if (activeSlide) {
                 let activeVideo = activeSlide.querySelector('video');
                 if (activeVideo) {

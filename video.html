@@ -200,31 +200,47 @@
         });
 
         function playActiveVideo() {
-            // Pause all videos
-            document.querySelectorAll('.swiper-slide video').forEach(v => {
-                v.pause();
-            });
+            const swiperContainer = document.querySelector('.mySwiper');
+            if (!swiperContainer) return;
             
-            // Find active slide precisely using Swiper's activeIndex
-            let activeSlide = swiper.slides[swiper.activeIndex];
-            if (activeSlide) {
-                let activeVideo = activeSlide.querySelector('video');
-                if (activeVideo) {
-                    activeVideo.currentTime = 0; // start from beginning when active
-                    let playPromise = activeVideo.play();
-                    
-                    // Catch the promise error if user scrolls too fast
-                    if (playPromise !== undefined) {
-                        playPromise.catch(error => {
-                            console.log("Autoplay prevented:", error);
-                        });
-                    }
+            const rect = swiperContainer.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            
+            let closestVideo = null;
+            let minDistance = Infinity;
+
+            // Pause all videos and find the visually centered one
+            document.querySelectorAll('.swiper-slide video').forEach(v => {
+                // Ignore videos that are completely hidden or detached
+                if (v.offsetWidth === 0 && v.offsetHeight === 0) return;
+                
+                v.pause();
+                
+                const vRect = v.getBoundingClientRect();
+                const vCenterX = vRect.left + vRect.width / 2;
+                const distance = Math.abs(centerX - vCenterX);
+                
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestVideo = v;
+                }
+            });
+
+            // Play the perfectly centered video
+            if (closestVideo) {
+                let playPromise = closestVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(e => console.log("Autoplay prevented:", e));
                 }
             }
         }
 
-        // Trigger logic on slide change end for stability
+        // Trigger logic on slide change and transition end
         swiper.on('slideChangeTransitionEnd', playActiveVideo);
+        swiper.on('sliderMove', function() {
+            // Optional: Pause videos while dragging to avoid audio/video mess
+            document.querySelectorAll('.swiper-slide video').forEach(v => v.pause());
+        });
         
         // Initial setup
         setTimeout(playActiveVideo, 100);

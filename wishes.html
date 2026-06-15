@@ -56,9 +56,21 @@
             .float-photo { width: 140px; height: 140px; border-bottom: 25px solid white; }
         }
         @media (max-width: 768px) {
-            .floating-photos {
-                display: none; /* Hide background photos completely on mobile to prevent messy overlapping */
+            .float-photo { 
+                width: 75px; 
+                height: 75px; 
+                border-width: 4px;
+                border-bottom: 15px solid white; 
+                opacity: 0.65; 
             }
+            /* Position all 6 photos to peek out from behind the card */
+            .floating-photos img:nth-child(1) { top: 2% !important; left: 1% !important; }
+            .floating-photos img:nth-child(2) { top: 40% !important; left: -2% !important; transform: rotate(-15deg) !important; }
+            .floating-photos img:nth-child(3) { top: 82% !important; left: 2% !important; }
+            
+            .floating-photos img:nth-child(4) { top: 4% !important; right: 1% !important; }
+            .floating-photos img:nth-child(5) { top: 48% !important; right: -2% !important; transform: rotate(12deg) !important; }
+            .floating-photos img:nth-child(6) { top: 78% !important; right: 2% !important; }
         }
 
         .hearts-header {
